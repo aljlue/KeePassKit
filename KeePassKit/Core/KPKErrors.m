@@ -29,7 +29,7 @@ NSString *const KPKErrorDomain = @"com.hicknhack.keepasskit";
 NSString *KPKErrorMessageForCode(NSInteger errorCode) {
   static NSDictionary *dict;
   static dispatch_once_t onceToken;
-  NSBundle *bundle = [NSBundle bundleForClass:KPKPair.class];
+  NSBundle *bundle = [NSBundle mainBundle];
   dispatch_once(&onceToken, ^{
     dict = @{
       @(KPKErrorAESDecryptionFailed)               : NSLocalizedStringFromTableInBundle(@"ERROR_AES_DECRYPTION_FAILED", nil, bundle, @""),

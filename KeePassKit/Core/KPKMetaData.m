@@ -85,7 +85,7 @@ value = NSDate.date; \
     _protectUrl = NO;
     _protectUserName = NO;
     _generator = [@"MacPass" copy];
-    _databaseName = [NSLocalizedStringFromTableInBundle(@"DATABASE", nil, [NSBundle bundleForClass:[self class]], "Default title for KDBX databases") copy];
+    _databaseName = [NSLocalizedStringFromTableInBundle(@"DATABASE", nil, [NSBundle mainBundle], "Default title for KDBX databases") copy];
     _databaseNameChanged = [now copy];
     _databaseDescription = [@"" copy];
     _databaseDescriptionChanged = [now copy];
@@ -366,7 +366,7 @@ value = NSDate.date; \
 
 - (void)addCustomIcon:(KPKIcon *)icon atIndex:(NSUInteger)index {
   [[self.tree.undoManager prepareWithInvocationTarget:self] removeCustomIcon:icon];
-  [self.tree.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"ADD_CUSTOM_ICON", nil, [NSBundle bundleForClass:[self class]], @"Action name for adding a customt icon.")];
+  [self.tree.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"ADD_CUSTOM_ICON", nil, [NSBundle mainBundle], @"Action name for adding a custom icon.")];
   index = MIN(_mutableCustomIcons.count, index);
   [self insertObject:icon inMutableCustomIconsAtIndex:index];
   /* remove delted node if icon is re-added via undo */
@@ -385,7 +385,7 @@ value = NSDate.date; \
   NSUInteger index = [_mutableCustomIcons indexOfObjectIdenticalTo:icon];
   if(index != NSNotFound) {
     [[self.tree.undoManager prepareWithInvocationTarget:self] addCustomIcon:icon atIndex:index];
-    [self.tree.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"DELETE_CUSTOM_ICON", nil, [NSBundle bundleForClass:[self class]], @"Action name for deleting a custom icon")];
+    [self.tree.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"DELETE_CUSTOM_ICON", nil, [NSBundle mainBundle], @"Action name for deleting a custom icon")];
     if(self.tree.mutableDeletedObjects[icon.uuid] != nil) {
       NSLog(@"Warning. Potential Internal inconsistency. Deleted node should not be present");
     }

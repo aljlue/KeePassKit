@@ -202,7 +202,7 @@ static NSSet *_observedKeyPathsSet;
   [copy _regenerateUUIDs];
   
   if(nil == titleOrNil) {
-    NSString *format = NSLocalizedStringFromTableInBundle(@"KPK_GROUP_COPY_%@", nil, [NSBundle bundleForClass:[self class]], "Title format for a copie of a group. Contains a %@ placeholder");
+    NSString *format = NSLocalizedStringFromTableInBundle(@"KPK_GROUP_COPY_%@", nil, [NSBundle mainBundle], "Title format for a copie of a group. Contains a %@ placeholder");
     titleOrNil = [[NSString alloc] initWithFormat:format, self.title];
   }
   copy.title = titleOrNil;

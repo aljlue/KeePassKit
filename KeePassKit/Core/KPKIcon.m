@@ -143,7 +143,7 @@
 
 - (void)setName:(NSString *)name {
   [self.tree.undoManager registerUndoWithTarget:self selector:@selector(setName:) object:self.name];
-  [self.tree.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_ICON_NAME", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the icons name")];
+  [self.tree.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_ICON_NAME", nil, [NSBundle mainBundle], @"Action name for setting the icons name")];
   _name = [name copy];
   self.modificationDate = [NSDate date];
 }

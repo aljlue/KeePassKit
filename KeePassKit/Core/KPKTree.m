@@ -102,7 +102,7 @@ NSString *const KPKEntryKey       = @"KPKEntryKey";
   if (self) {
   }
   KPKGroup *parentGroup = [self createGroup:nil];
-  NSBundle *kpkBundle = [NSBundle bundleForClass:[self class]];
+  NSBundle *kpkBundle = [NSBundle mainBundle];
   parentGroup.title = NSLocalizedStringFromTableInBundle(@"GENERAL", nil, kpkBundle, "General");
   parentGroup.iconId = KPKIconFolder;
   self.root = parentGroup;

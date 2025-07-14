@@ -123,7 +123,7 @@
    initalize it with sane defaults
    */
   KPKGroup *rootGroup = [[KPKGroup alloc] init];
-  rootGroup.title = NSLocalizedStringFromTableInBundle(@"DATABASE", nil, [NSBundle bundleForClass:[self class]], "Title for the root group created for KDB files");
+  rootGroup.title = NSLocalizedStringFromTableInBundle(@"DATABASE", nil, [NSBundle mainBundle], "Title for the root group created for KDB files");
   rootGroup.iconId = KPKIconFolder;
   tree.root = rootGroup;
   rootGroup.isExpanded = YES;

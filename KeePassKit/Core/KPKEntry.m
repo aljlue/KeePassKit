@@ -710,37 +710,37 @@ NSSet *_protectedKeyPathForAttribute(SEL aSelector) {
 
 - (void)setTitle:(NSString *)title {
   [[self.undoManager prepareWithInvocationTarget:self] setTitle:self.title];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_TITLE", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the title of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_TITLE", nil, [NSBundle mainBundle], @"Action name for setting the title of an enty")];
   [self _setValue:title forAttributeWithKey:kKPKTitleKey sendChanges:NO];
 }
 
 - (void)setUsername:(NSString *)username {
   [[self.undoManager prepareWithInvocationTarget:self] setUsername:self.username];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_USERNAME", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the username of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_USERNAME", nil, [NSBundle mainBundle], @"Action name for setting the username of an enty")];
   [self _setValue:username forAttributeWithKey:kKPKUsernameKey sendChanges:NO];
 }
 
 - (void)setPassword:(NSString *)password {
   [[self.undoManager prepareWithInvocationTarget:self] setPassword:self.password];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_PASSWORD", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the password of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_PASSWORD", nil, [NSBundle mainBundle], @"Action name for setting the password of an enty")];
   [self _setValue:password forAttributeWithKey:kKPKPasswordKey sendChanges:NO];
 }
 
 - (void)setNotes:(NSString *)notes {
   [[self.undoManager prepareWithInvocationTarget:self] setNotes:self.notes];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_NOTES", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the notes of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_NOTES", nil, [NSBundle mainBundle], @"Action name for setting the notes of an enty")];
   [self _setValue:notes forAttributeWithKey:kKPKNotesKey sendChanges:NO];
 }
 
 - (void)setUrl:(NSString *)url {
   [[self.undoManager prepareWithInvocationTarget:self] setUrl:self.url];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_URL", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the url of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_URL", nil, [NSBundle mainBundle], @"Action name for setting the url of an enty")];
   [self _setValue:url forAttributeWithKey:kKPKURLKey sendChanges:NO];
 }
 
 - (void)setOverrideURL:(NSString *)overrideURL {
   [[self.undoManager prepareWithInvocationTarget:self] setOverrideURL:self.overrideURL];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_OVERRIDE_URL", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the overridel url of an entry")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_OVERRIDE_URL", nil, [NSBundle mainBundle], @"Action name for setting the overridel url of an entry")];
   [NSNotificationCenter.defaultCenter postNotificationName:KPKWillChangeEntryNotification object:self];
   _overrideURL = [overrideURL copy];
   [NSNotificationCenter.defaultCenter postNotificationName:KPKDidChangeEntryNotification object:self];
@@ -748,7 +748,7 @@ NSSet *_protectedKeyPathForAttribute(SEL aSelector) {
 
 - (void)setForegroundColor:(NSUIColor *)foregroundColor {
   [[self.undoManager prepareWithInvocationTarget:self] setForegroundColor:self.foregroundColor];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_FOREGROUND_COLOR", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the foreground color of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_FOREGROUND_COLOR", nil, [NSBundle mainBundle], @"Action name for setting the foreground color of an enty")];
   [NSNotificationCenter.defaultCenter postNotificationName:KPKWillChangeEntryNotification object:self];
   _foregroundColor = foregroundColor;
   [NSNotificationCenter.defaultCenter postNotificationName:KPKDidChangeEntryNotification object:self];
@@ -756,7 +756,7 @@ NSSet *_protectedKeyPathForAttribute(SEL aSelector) {
 
 - (void)setBackgroundColor:(NSUIColor *)backgroundColor {
   [[self.undoManager prepareWithInvocationTarget:self] setBackgroundColor:self.backgroundColor];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_BACKGROUND_COLOR", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the background color of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_BACKGROUND_COLOR", nil, [NSBundle mainBundle], @"Action name for setting the background color of an enty")];
   [NSNotificationCenter.defaultCenter postNotificationName:KPKWillChangeEntryNotification object:self];
   _backgroundColor = backgroundColor;
   [NSNotificationCenter.defaultCenter postNotificationName:KPKDidChangeEntryNotification object:self];
@@ -764,7 +764,7 @@ NSSet *_protectedKeyPathForAttribute(SEL aSelector) {
 
 - (void)setCheckPasswordQuality:(BOOL)checkPasswordQuality {
   [[self.undoManager prepareWithInvocationTarget:self] setCheckPasswordQuality:self.checkPasswordQuality];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_CHECK_PASSWORD_QUALITY", nil,[NSBundle bundleForClass:self.class] , @"Action name for enabling or disabling the password quality estimation display")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_CHECK_PASSWORD_QUALITY", nil,[NSBundle mainBundle] , @"Action name for enabling or disabling the password quality estimation display")];
   [NSNotificationCenter.defaultCenter postNotificationName:KPKWillChangeEntryNotification object:self];
   _checkPasswordQuality = checkPasswordQuality;
   [NSNotificationCenter.defaultCenter postNotificationName:KPKDidChangeEntryNotification object:self];

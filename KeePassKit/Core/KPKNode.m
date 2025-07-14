@@ -260,7 +260,7 @@
 
 - (void)setTags:(NSArray<NSString *> *)tags {
   [[self.undoManager prepareWithInvocationTarget:self] setTags:self.tags];
-  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_TAGS", nil, [NSBundle bundleForClass:self.class], @"Action name for setting the tags of an enty")];
+  [self.undoManager setActionName:NSLocalizedStringFromTableInBundle(@"SET_TAGS", nil, [NSBundle mainBundle], @"Action name for setting the tags of an enty")];
   [self.tree _unregisterTags:_tags];
   
   tags = [[NSSet setWithArray:tags].allObjects sortedArrayUsingSelector:@selector(compare:)];

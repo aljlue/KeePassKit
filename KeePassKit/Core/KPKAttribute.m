@@ -162,7 +162,7 @@
   }
   if(!self.isDefault) {
     [(KPKAttribute *)[self.entry.undoManager prepareWithInvocationTarget:self] setValue:self.value];
-    NSString *template = NSLocalizedStringFromTableInBundle(@"SET_CUSTOM_ATTTRIBUTE_%@", nil, [NSBundle bundleForClass:self.class], @"Action name for setting value of a custom attribute. Contains %@ placeholder");
+    NSString *template = NSLocalizedStringFromTableInBundle(@"SET_CUSTOM_ATTTRIBUTE_%@", nil, [NSBundle mainBundle], @"Action name for setting value of a custom attribute. Contains %@ placeholder");
     [self.entry.undoManager setActionName:[NSString stringWithFormat:template, self.key ]];
   }
   [self.entry touchModified];
@@ -192,11 +192,11 @@
   if(!self.isDefault) {
     [[self.entry.undoManager prepareWithInvocationTarget:self] setProtect:_protect];
     if(protected) {
-      NSString *template = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PROTECT_%@", nil, [NSBundle bundleForClass:self.class], @"Action name for setting a custom string value protected"), self.key];
+      NSString *template = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PROTECT_%@", nil, [NSBundle mainBundle], @"Action name for setting a custom string value protected"), self.key];
       [self.entry.undoManager setActionName:template];
     }
     else {
-      NSString *template = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PROTECT_%@", nil, [NSBundle bundleForClass:self.class], @"Action name for setting a custom string value protected"), self.key];
+      NSString *template = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"PROTECT_%@", nil, [NSBundle mainBundle], @"Action name for setting a custom string value protected"), self.key];
       [self.entry.undoManager setActionName:template];
     }
   }
