@@ -51,7 +51,7 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
   
   switch( status ) {
     case kCCSuccess:
-      description = NSLocalizedString(@"Success", @"Error description");
+      description = NSLocalizedString(@"Successful", @"Error description");
       break;
       
     case kCCParamError:
@@ -85,7 +85,7 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
       break;
       
     default:
-      description = NSLocalizedString(@"Unknown Error", @"Error description");
+      description = NSLocalizedString(@"unknown_error", @"Error description");
       break;
   }
   
