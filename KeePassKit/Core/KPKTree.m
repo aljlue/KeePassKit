@@ -55,7 +55,7 @@ NSString *const KPKEntryKey       = @"KPKEntryKey";
 
 
 @interface KPKTree () {
-  NSCountedSet *_tags;
+    NSCountedSet *_tags;
 }
 @property(nonatomic, strong) KPKMetaData *metaData;
 
@@ -68,281 +68,281 @@ NSString *const KPKEntryKey       = @"KPKEntryKey";
 @dynamic availableTags;
 
 + (NSSet *)keyPathsForValuesAffectingGroups {
-  return [NSSet setWithObject:NSStringFromSelector(@selector(root))];
+    return [NSSet setWithObject:NSStringFromSelector(@selector(root))];
 }
 
 + (NSSet *)keyPathsForValuesAffectingChildren {
-  return [NSSet setWithObject:NSStringFromSelector(@selector(root))];
+    return [NSSet setWithObject:NSStringFromSelector(@selector(root))];
 }
 
 - (instancetype)init {
-  self = [super init];
-  if(self) {
-    _mutableDeletedObjects = [[NSMutableDictionary alloc] init];
-    _mutableDeletedNodes = [[NSMutableDictionary alloc] init];
-    _tags = [[NSCountedSet alloc] init];
-    self.metaData = [[KPKMetaData alloc] init]; // use setter!
-  }
-  return self;
+    self = [super init];
+    if(self) {
+        _mutableDeletedObjects = [[NSMutableDictionary alloc] init];
+        _mutableDeletedNodes = [[NSMutableDictionary alloc] init];
+        _tags = [[NSCountedSet alloc] init];
+        self.metaData = [[KPKMetaData alloc] init]; // use setter!
+    }
+    return self;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-  KPKTree *copy = [[KPKTree alloc] init];
-  copy.delegate = self.delegate;
-  copy.metaData = [self.metaData copy];
-  copy.mutableDeletedObjects = [[NSMutableDictionary alloc] initWithDictionary:self.mutableDeletedObjects copyItems:YES];
-  copy.mutableDeletedNodes = [[NSMutableDictionary alloc] initWithDictionary:self.mutableDeletedNodes copyItems:YES];
-  copy.root = [self.root copy];
-  
-  return copy;
+    KPKTree *copy = [[KPKTree alloc] init];
+    copy.delegate = self.delegate;
+    copy.metaData = [self.metaData copy];
+    copy.mutableDeletedObjects = [[NSMutableDictionary alloc] initWithDictionary:self.mutableDeletedObjects copyItems:YES];
+    copy.mutableDeletedNodes = [[NSMutableDictionary alloc] initWithDictionary:self.mutableDeletedNodes copyItems:YES];
+    copy.root = [self.root copy];
+    
+    return copy;
 }
 
 - (instancetype)initWithTemplateContents {
-  self = [self init];
-  if (self) {
-  }
-  KPKGroup *parentGroup = [self createGroup:nil];
-  NSBundle *kpkBundle = [NSBundle mainBundle];
-  parentGroup.title = NSLocalizedStringFromTableInBundle(@"General", nil, kpkBundle, "General");
-  parentGroup.iconId = KPKIconFolder;
-  self.root = parentGroup;
-  
-  KPKGroup *group = [self createGroup:parentGroup];
-  group.title = NSLocalizedStringFromTableInBundle(@"Network", nil, kpkBundle, "Network");
-  group.iconId = KPKIconServer;
-  [group addToGroup:parentGroup];
-  
-  group = [self createGroup:parentGroup];
-  group.title = NSLocalizedStringFromTableInBundle(@"Internet", nil, kpkBundle, "Internet");
-  group.iconId = KPKIconPackageNetwork;
-  [group addToGroup:parentGroup];
-  
-  group = [self createGroup:parentGroup];
-  group.title = NSLocalizedStringFromTableInBundle(@"EMail", nil, kpkBundle, "EMail");
-  group.iconId = KPKIconEmail;
-  [group addToGroup:parentGroup];
-  
-  group = [self createGroup:parentGroup];
-  group.title = NSLocalizedStringFromTableInBundle(@"Homebanking", nil, kpkBundle, "Homebanking");
-  group.iconId = KPKIconPercentage;
-  [group addToGroup:parentGroup];
-  
-  return self;
+    self = [self init];
+    if (self) {
+    }
+    KPKGroup *parentGroup = [self createGroup:nil];
+    NSBundle *kpkBundle = [NSBundle mainBundle];
+    parentGroup.title = NSLocalizedStringFromTableInBundle(@"General", nil, kpkBundle, "General");
+    parentGroup.iconId = KPKIconFolder;
+    self.root = parentGroup;
+    
+    KPKGroup *group = [self createGroup:parentGroup];
+    group.title = NSLocalizedStringFromTableInBundle(@"Network", nil, kpkBundle, "Network");
+    group.iconId = KPKIconServer;
+    [group addToGroup:parentGroup];
+    
+    group = [self createGroup:parentGroup];
+    group.title = NSLocalizedStringFromTableInBundle(@"Internet", nil, kpkBundle, "Internet");
+    group.iconId = KPKIconPackageNetwork;
+    [group addToGroup:parentGroup];
+    
+    group = [self createGroup:parentGroup];
+    group.title = NSLocalizedStringFromTableInBundle(@"EMail", nil, kpkBundle, "EMail");
+    group.iconId = KPKIconEmail;
+    [group addToGroup:parentGroup];
+    
+    group = [self createGroup:parentGroup];
+    group.title = NSLocalizedStringFromTableInBundle(@"Homebanking", nil, kpkBundle, "Homebanking");
+    group.iconId = KPKIconPercentage;
+    [group addToGroup:parentGroup];
+    
+    return self;
 }
 
 
 - (void)dealloc {
-  self.metaData = nil;
-  self.root = nil;
+    self.metaData = nil;
+    self.root = nil;
 }
 
 - (NSString *)description {
-  NSMutableString *description = [[NSMutableString alloc] init];
-  [description appendString:@"{\r"];
-  [self.root _traverseNodesWithBlock:^(KPKNode *node, BOOL *stop) {
-    [description appendFormat:@"\t%@\r", node.description];
-  }];
-  [description appendString:@"}"];
-  return [description copy];
+    NSMutableString *description = [[NSMutableString alloc] init];
+    [description appendString:@"{\r"];
+    [self.root _traverseNodesWithBlock:^(KPKNode *node, BOOL *stop) {
+        [description appendFormat:@"\t%@\r", node.description];
+    }];
+    [description appendString:@"}"];
+    return [description copy];
 }
 
 
 - (KPKGroup *)createGroup:(KPKGroup *)parent {
-  KPKGroup *group = [[KPKGroup alloc] init];
-  //group.parent = parent;
-  return group;
+    KPKGroup *group = [[KPKGroup alloc] init];
+    //group.parent = parent;
+    return group;
 }
 
 - (KPKEntry *)createEntry:(KPKGroup *)parent {
-  KPKEntry *entry = [[KPKEntry alloc] init];
-  //entry.tree = self;
-  if(!parent.hasDefaultIcon) {
-    entry.iconUUID = parent.iconUUID;
-    entry.iconId = parent.iconId;
-  }
-  /* ensure default protection settings when creating a new entry */
-  for(KPKAttribute *attribute in entry.mutableAttributes) {
-    attribute.protect |= [self.metaData protectAttributeWithKey:attribute.key];
-  }
-  /* set parent at the end to prefent undo registration */
-  //entry.parent = parent; Do not set the parent, since we have not added the entry yet
-  return entry;
+    KPKEntry *entry = [[KPKEntry alloc] init];
+    //entry.tree = self;
+    if(!parent.hasDefaultIcon) {
+        entry.iconUUID = parent.iconUUID;
+        entry.iconId = parent.iconId;
+    }
+    /* ensure default protection settings when creating a new entry */
+    for(KPKAttribute *attribute in entry.mutableAttributes) {
+        attribute.protect |= [self.metaData protectAttributeWithKey:attribute.key];
+    }
+    /* set parent at the end to prefent undo registration */
+    //entry.parent = parent; Do not set the parent, since we have not added the entry yet
+    return entry;
 }
 
 - (KPKGroup *)createTrash {
-  if(!self.metaData.useTrash) {
-    return nil;
-  }
-  KPKGroup *trash = self.trash;
-  if(nil != trash) {
+    if(!self.metaData.useTrash) {
+        return nil;
+    }
+    KPKGroup *trash = self.trash;
+    if(nil != trash) {
+        return trash;
+    }
+    trash = [self createGroup:self.root];
+    trash.iconId = KPKIconTrash;
+    trash.title = NSLocalizedStringFromTableInBundle(@"TRASH", nil, [NSBundle bundleForClass:[self class]], @"Name for the trash group");
+    trash.isSearchEnabled = KPKInheritNO; // disable search for trash by default
+    trash.isAutoTypeEnabled = KPKInheritNO; // disable autotype for trash by default
+    [trash addToGroup:self.root];
+    self.metaData.trashUuid = trash.uuid;
     return trash;
-  }
-  trash = [self createGroup:self.root];
-  trash.iconId = KPKIconTrash;
-  trash.title = NSLocalizedStringFromTableInBundle(@"TRASH", nil, [NSBundle bundleForClass:[self class]], @"Name for the trash group");
-  trash.isSearchEnabled = KPKInheritNO; // disable search for trash by default
-  trash.isAutoTypeEnabled = KPKInheritNO; // disable autotype for trash by default
-  [trash addToGroup:self.root];
-  self.metaData.trashUuid = trash.uuid;
-  return trash;
 }
 
 #pragma mark -
 #pragma mark Properties
 - (NSUndoManager *)undoManager {
-  if([self.delegate respondsToSelector:@selector(undoManagerForTree:)]) {
-    return [self.delegate undoManagerForTree:self];
-  }
-  return nil;
+    if([self.delegate respondsToSelector:@selector(undoManagerForTree:)]) {
+        return [self.delegate undoManagerForTree:self];
+    }
+    return nil;
 }
 
 - (BOOL)isEditable {
-  if([self.delegate respondsToSelector:@selector(shouldEditTree:)]) {
-    return [self.delegate shouldEditTree:self];
-  }
-  return YES;
+    if([self.delegate respondsToSelector:@selector(shouldEditTree:)]) {
+        return [self.delegate shouldEditTree:self];
+    }
+    return YES;
 }
 
 - (void)setMetaData:(KPKMetaData *)metaData {
-  _metaData = metaData;
-  self.metaData.tree = self;
+    _metaData = metaData;
+    self.metaData.tree = self;
 }
 
 - (KPKGroup *)trash {
-  /* Caching is dangerous, as we might have deleted the trashcan */
-  if(self.metaData.useTrash) {
-    if(self.metaData.trashUuid.kpk_isNullUUID) {
-      return nil;
+    /* Caching is dangerous, as we might have deleted the trashcan */
+    if(self.metaData.useTrash) {
+        if(self.metaData.trashUuid.kpk_isNullUUID) {
+            return nil;
+        }
+        return [self.root groupForUUID:self.metaData.trashUuid];
     }
-    return [self.root groupForUUID:self.metaData.trashUuid];
-  }
-  return nil;
+    return nil;
 }
 
 - (void)setTrash:(KPKGroup *)trash {
-  if(self.metaData.useTrash) {
-    if(![self.metaData.trashUuid isEqual:trash.uuid]) {
-      self.metaData.trashUuid = trash.uuid;
+    if(self.metaData.useTrash) {
+        if(![self.metaData.trashUuid isEqual:trash.uuid]) {
+            self.metaData.trashUuid = trash.uuid;
+        }
     }
-  }
 }
 
 - (KPKGroup *)templates {
-  return [self.root groupForUUID:self.metaData.entryTemplatesGroupUuid];
+    return [self.root groupForUUID:self.metaData.entryTemplatesGroupUuid];
 }
 
 - (void)setTemplates:(KPKGroup *)templates {
-  self.metaData.entryTemplatesGroupUuid = templates.uuid;
+    self.metaData.entryTemplatesGroupUuid = templates.uuid;
 }
 
 - (void)setRoot:(KPKGroup *)root {
-  if(_root != root) {
-    _root = root;
-    _root.tree = self;
-  }
+    if(_root != root) {
+        _root = root;
+        _root.tree = self;
+    }
 }
 
 - (NSArray *)groups {
-  if(self.root) {
-    return @[self.root];
-  }
-  return @[];
+    if(self.root) {
+        return @[self.root];
+    }
+    return @[];
 }
 
 - (NSArray<KPKNode *> *)children {
-  return self.root.children;
+    return self.root.children;
 }
 
 - (NSDictionary<NSUUID *,KPKDeletedNode *> *)deletedObjects {
-  return [self.mutableDeletedObjects copy];
+    return [self.mutableDeletedObjects copy];
 }
 
 - (NSArray *)allGroups {
-  return (self.root).childGroups;
+    return (self.root).childGroups;
 }
 
 - (NSArray *)allEntries {
-  return (self.root).childEntries;
+    return (self.root).childEntries;
 }
 
 - (NSArray *)allHistoryEntries {
-  NSArray *allEntries = self.allEntries;
-  if(allEntries.count == 0) {
-    return @[];
-  }
-  NSMutableArray *historyEntries = [[NSMutableArray alloc] init];
-  for(KPKEntry *entry in allEntries) {
-    NSAssert(entry.mutableHistory != nil, @"History object cannot be nil");
-    [historyEntries addObjectsFromArray:entry.mutableHistory];
-  }
-  return historyEntries;
+    NSArray *allEntries = self.allEntries;
+    if(allEntries.count == 0) {
+        return @[];
+    }
+    NSMutableArray *historyEntries = [[NSMutableArray alloc] init];
+    for(KPKEntry *entry in allEntries) {
+        NSAssert(entry.mutableHistory != nil, @"History object cannot be nil");
+        [historyEntries addObjectsFromArray:entry.mutableHistory];
+    }
+    return historyEntries;
 }
 
 - (KPKFileVersion)minimumVersion {
-  KPKFileVersion minimum = KPKMakeFileVersion(KPKDatabaseFormatKdb, kKPKKdbFileVersion);
-  
-  BOOL aesKdf = [self.metaData.keyDerivationParameters[KPKKeyDerivationOptionUUID] isEqual:[KPKAESKeyDerivation uuid].kpk_uuidData];
-  BOOL entriesInRoot = self.root.entries.count > 0;
-  BOOL publicData = self.metaData.mutableCustomPublicData.count > 0;
-  BOOL changedCustomIcon = NO;
-  BOOL changedCustomData = NO;
-  
-  for(KPKIcon *icon in self.metaData.mutableCustomIcons) {
-    if(icon.name.length > 0 || icon.modificationDate != nil) {
-      changedCustomIcon = YES;
-      break;
+    KPKFileVersion minimum = KPKMakeFileVersion(KPKDatabaseFormatKdb, kKPKKdbFileVersion);
+    
+    BOOL aesKdf = [self.metaData.keyDerivationParameters[KPKKeyDerivationOptionUUID] isEqual:[KPKAESKeyDerivation uuid].kpk_uuidData];
+    BOOL entriesInRoot = self.root.entries.count > 0;
+    BOOL publicData = self.metaData.mutableCustomPublicData.count > 0;
+    BOOL changedCustomIcon = NO;
+    BOOL changedCustomData = NO;
+    
+    for(KPKIcon *icon in self.metaData.mutableCustomIcons) {
+        if(icon.name.length > 0 || icon.modificationDate != nil) {
+            changedCustomIcon = YES;
+            break;
+        }
     }
-  }
-  
-  for(NSString *key in self.metaData.mutableCustomData) {
-    KPKModifiedString *string = self.metaData.mutableCustomData[key];
-    if(string.modificationDate != nil) {
-      changedCustomData = YES;
+    
+    for(NSString *key in self.metaData.mutableCustomData) {
+        KPKModifiedString *string = self.metaData.mutableCustomData[key];
+        if(string.modificationDate != nil) {
+            changedCustomData = YES;
+        }
     }
-  }
-
-  BOOL requiresKDBX = !aesKdf || entriesInRoot || publicData || changedCustomIcon || changedCustomData;
-  
-  if(requiresKDBX) {
-    minimum.format = KPKDatabaseFormatKdbx;
-    minimum.version = kKPKKdbxFileVersion3;
-    if(changedCustomIcon || changedCustomData) {
-      minimum.version = kKPKKdbxFileVersion4_1;
+    
+    BOOL requiresKDBX = !aesKdf || entriesInRoot || publicData || changedCustomIcon || changedCustomData;
+    
+    if(requiresKDBX) {
+        minimum.format = KPKDatabaseFormatKdbx;
+        minimum.version = kKPKKdbxFileVersion3;
+        if(changedCustomIcon || changedCustomData) {
+            minimum.version = kKPKKdbxFileVersion4_1;
+        }
+        else if(publicData || !aesKdf) {
+            minimum.version = kKPKKdbxFileVersion4;
+        }
     }
-    else if(publicData || !aesKdf) {
-          minimum.version = kKPKKdbxFileVersion4;
+    if(!self.root) {
+        return minimum;
     }
-  }
-  if(!self.root) {
-    return minimum;
-  }
-  return KPKFileVersionMax(minimum, self.root.minimumVersion);
+    return KPKFileVersionMax(minimum, self.root.minimumVersion);
 }
 
 - (NSString *)defaultAutotypeSequence {
-  if([self.delegate respondsToSelector:@selector(defaultAutotypeSequenceForTree:)]) {
-    return [self.delegate defaultAutotypeSequenceForTree:self];
-  }
-  return nil;
+    if([self.delegate respondsToSelector:@selector(defaultAutotypeSequenceForTree:)]) {
+        return [self.delegate defaultAutotypeSequenceForTree:self];
+    }
+    return nil;
 }
 
 - (NSArray<NSString *> *)availableTags {
-  return _tags.allObjects;
+    return _tags.allObjects;
 }
 
 
 - (void)_registerTags:(NSArray<NSString *> *)tags {
-  // _tags is NSCountedSet
-  for(NSString *tag in tags) {
-    [_tags addObject:tag];
-  }
+    // _tags is NSCountedSet
+    for(NSString *tag in tags) {
+        [_tags addObject:tag];
+    }
 }
 
 - (void)_unregisterTags:(NSArray<NSString *> *)tags  {
-  // _tags is NSCountedSet
-  for(NSString *tag in tags) {
-    [_tags removeObject:tag];
-  }
+    // _tags is NSCountedSet
+    for(NSString *tag in tags) {
+        [_tags removeObject:tag];
+    }
 }
 
 
