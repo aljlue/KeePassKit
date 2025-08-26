@@ -35,19 +35,17 @@ Pod::Spec.new do |s|
 
     # Common exclusions
     ss.exclude_files = [
-      "Argon2/src/test.c",
-      "Argon2/src/run.c",
-      "Argon2/src/bench.c"
+      "Argon2/test.c",
+      "Argon2/run.c",
+      "Argon2/bench.c"
     ]
 
     # Platform-specific exclusions
-    ss.ios.exclude_files   = ["Argon2/src/opt.c", "Argon2/src/blake2/blamka-round-opt.h"]
-    ss.watchos.exclude_files = ["Argon2/src/opt.c", "Argon2/src/blake2/blamka-round-opt.h"]
-    ss.tvos.exclude_files = ["Argon2/src/opt.c", "Argon2/src/blake2/blamka-round-opt.h"]
-    ss.osx.exclude_files   = ["Argon2/src/ref.c", "Argon2/src/blake2/blamka-round-ref.h"]
+    ss.ios.exclude_files   = ["Argon2/opt.c", "Argon2/blake2/blamka-round-opt.h"]
+    ss.watchos.exclude_files = ["Argon2/opt.c", "Argon2/blake2/blamka-round-opt.h"]
+    ss.tvos.exclude_files = ["Argon2/opt.c", "Argon2/blake2/blamka-round-opt.h"]
+    ss.osx.exclude_files   = ["Argon2/ref.c", "Argon2/blake2/blamka-round-ref.h"]
 
-    # Public headers
-    ss.public_header_files = "Argon2/include/**/*.h"
   end
 
 
