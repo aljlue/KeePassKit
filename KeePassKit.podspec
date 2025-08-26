@@ -29,9 +29,8 @@ Pod::Spec.new do |s|
 
   s.subspec 'Argon2' do |ss|
     ss.source_files = [
-      "Argon2/src/**/*.{c,h}",
-      "Argon2/include/**/*.h",
-      "Argon2/src/blake2/**/*.{c,h}"
+      "Argon2/**/*.{c,h}",
+      "Argon2/blake2/**/*.{c,h}"
     ]
 
     # Common exclusions
