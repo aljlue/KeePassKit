@@ -100,32 +100,33 @@ NSString *const KPKEntryKey       = @"KPKEntryKey";
 - (instancetype)initWithTemplateContents {
     self = [self init];
     if (self) {
+        KPKGroup *parentGroup = [self createGroup:nil];
+        NSBundle *kpkBundle = [NSBundle mainBundle];
+        parentGroup.title = NSLocalizedStringFromTableInBundle(@"General", nil, kpkBundle, "General");
+        parentGroup.iconId = KPKIconFolder;
+        self.root = parentGroup;
+        
+        KPKGroup *group = [self createGroup:parentGroup];
+        group.title = NSLocalizedStringFromTableInBundle(@"Network", nil, kpkBundle, "Network");
+        group.iconId = KPKIconServer;
+        [group addToGroup:parentGroup];
+        
+        group = [self createGroup:parentGroup];
+        group.title = NSLocalizedStringFromTableInBundle(@"Internet", nil, kpkBundle, "Internet");
+        group.iconId = KPKIconPackageNetwork;
+        [group addToGroup:parentGroup];
+        
+        group = [self createGroup:parentGroup];
+        group.title = NSLocalizedStringFromTableInBundle(@"EMail", nil, kpkBundle, "EMail");
+        group.iconId = KPKIconEmail;
+        [group addToGroup:parentGroup];
+        
+        group = [self createGroup:parentGroup];
+        group.title = NSLocalizedStringFromTableInBundle(@"Homebanking", nil, kpkBundle, "Homebanking");
+        group.iconId = KPKIconPercentage;
+        [group addToGroup:parentGroup];
     }
-    KPKGroup *parentGroup = [self createGroup:nil];
-    NSBundle *kpkBundle = [NSBundle mainBundle];
-    parentGroup.title = NSLocalizedStringFromTableInBundle(@"General", nil, kpkBundle, "General");
-    parentGroup.iconId = KPKIconFolder;
-    self.root = parentGroup;
     
-    KPKGroup *group = [self createGroup:parentGroup];
-    group.title = NSLocalizedStringFromTableInBundle(@"Network", nil, kpkBundle, "Network");
-    group.iconId = KPKIconServer;
-    [group addToGroup:parentGroup];
-    
-    group = [self createGroup:parentGroup];
-    group.title = NSLocalizedStringFromTableInBundle(@"Internet", nil, kpkBundle, "Internet");
-    group.iconId = KPKIconPackageNetwork;
-    [group addToGroup:parentGroup];
-    
-    group = [self createGroup:parentGroup];
-    group.title = NSLocalizedStringFromTableInBundle(@"EMail", nil, kpkBundle, "EMail");
-    group.iconId = KPKIconEmail;
-    [group addToGroup:parentGroup];
-    
-    group = [self createGroup:parentGroup];
-    group.title = NSLocalizedStringFromTableInBundle(@"Homebanking", nil, kpkBundle, "Homebanking");
-    group.iconId = KPKIconPercentage;
-    [group addToGroup:parentGroup];
     
     return self;
 }
