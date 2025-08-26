@@ -28,14 +28,13 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Argon2' do |ss|
-    # Include all source files recursively
     ss.source_files = [
-      "Argon2/src/**/*.{c,h}",           # All C files and headers in src
-      "Argon2/include/**/*.h",           # All headers in include
-      "Argon2/src/blake2/**/*.{c,h}"     # All C files and headers in blake2
+      "Argon2/src/**/*.{c,h}",
+      "Argon2/include/**/*.h",
+      "Argon2/src/blake2/**/*.{c,h}"
     ]
 
-    # Exclude test/bench/run files
+    # Common exclusions
     ss.exclude_files = [
       "Argon2/src/test.c",
       "Argon2/src/run.c",
@@ -44,13 +43,14 @@ Pod::Spec.new do |s|
 
     # Platform-specific exclusions
     ss.ios.exclude_files   = ["Argon2/src/opt.c", "Argon2/src/blake2/blamka-round-opt.h"]
-    ss.watchos.exclude_files = ss.ios.exclude_files
-    ss.tvos.exclude_files = ss.ios.exclude_files
+    ss.watchos.exclude_files = ["Argon2/src/opt.c", "Argon2/src/blake2/blamka-round-opt.h"]
+    ss.tvos.exclude_files = ["Argon2/src/opt.c", "Argon2/src/blake2/blamka-round-opt.h"]
     ss.osx.exclude_files   = ["Argon2/src/ref.c", "Argon2/src/blake2/blamka-round-ref.h"]
 
     # Public headers
     ss.public_header_files = "Argon2/include/**/*.h"
   end
+
 
 
   s.subspec 'ChaCha20' do |ss|
