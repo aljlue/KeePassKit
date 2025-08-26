@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Argon2' do |ss|
-    ss.source_files = "Argon2/src/*.{h,c}", "Argon2/include/*.h", "Argon2/src/blake2/*.{h,c}"
+    ss.source_files = "Argon2/src/**/*.{h,c}", "Argon2/include/*.h", "Argon2/src/blake2/**/*.{h,c}"
     ss.exclude_files = "Argon2/src/test.c", "Argon2/src/run.c", "Argon2/src/bench.c"
     ss.osx.exclude_files = "Argon2/src/ref.c", "Argon2/src/blake2/blamka-round-ref.h"
     ss.ios.exclude_files = "Argon2/src/opt.c", "Argon2/src/blake2/blamka-round-opt.h"
