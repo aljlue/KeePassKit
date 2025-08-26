@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "KeePassKit"
-  s.version      = "1.12"
+  s.version      = "1.12.1"
   s.summary      = "KeePass Database loading, storing and manipulation framework."
   s.homepage     = "https://github.com/MacPass/KeePassKit"
   s.license      = "GPLv3"
